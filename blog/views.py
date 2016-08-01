@@ -5,8 +5,10 @@ from blog import models
 # Create your views here.
 def Post(request, post_id):
 	post = models.Post.objects.get(id = post_id)
+	categories = models.Category.objects.all()
 	context = {
 		'post' : post,
+		'categories': categories
 	}
 	return render(request, 'post.html', context)
 	#return HttpResponse('Welcome to my post page' + post_id) 
@@ -19,8 +21,10 @@ def Index(request):
 def Category(request, category_id):
 	category = models.Category.objects.get(id = category_id)
 	posts = models.Post.objects.filter(category_id = category_id)
+	categories = models.Category.objects.all()
 	context = {
 	'category': category,
 	'posts': posts,
+	'categories': categories,
 	}
 	return render(request, 'category.html', context)
